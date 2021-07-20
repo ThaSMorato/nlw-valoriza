@@ -1,5 +1,5 @@
 import { IUser } from "../entities/User";
-import { getCustomRepository } from "typeorm"
+import { getCustomRepository } from "typeorm";
 import { UserRepositories } from "../repositories/UserRepositories";
 
 interface IUserRequest {
