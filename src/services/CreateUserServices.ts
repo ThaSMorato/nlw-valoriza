@@ -1,16 +1,18 @@
 import { IUser } from "../entities/User";
 import { getCustomRepository } from "typeorm";
 import { UserRepositories } from "../repositories/UserRepositories";
+import { hash } from "bcryptjs";
 
 interface IUserRequest {
     name: string;
     email: string;
     admin?: boolean;
+    password: string;
 }
 
 class CreateUserService {
 
-    async execute ({ email, name, admin } : IUserRequest): Promise<IUser> {
+    async execute ({ email, name, admin = false, password } : IUserRequest): Promise<IUser> {
 
         if (!email) {
             throw new Error("Email is empty");
@@ -24,10 +26,13 @@ class CreateUserService {
             throw new Error('User already exists');
         }
 
+        const passwordHash = await hash(password, 8);
+
         const user = userRepositories.create({
             name,
             email,
-            admin
+            admin,
+            password : passwordHash
         });
 
         await userRepositories.save(user);
