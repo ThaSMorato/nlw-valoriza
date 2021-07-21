@@ -8,6 +8,7 @@ interface IUser {
     admin?: boolean;
     created_at: Date;
     updated_at: Date;
+    password: string;
 }
 
 @Entity("users")
@@ -24,6 +25,9 @@ class User {
 
     @Column()
     admin: boolean;
+
+    @Column()
+    password : string;
 
     @CreateDateColumn()
     created_at : Date;
