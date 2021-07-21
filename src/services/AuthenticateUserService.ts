@@ -27,6 +27,7 @@ class AuthenticateUserService {
         }
 
         //44108e1c851d68693c5a5128920e3c8d72d57abb
+        //wumpaloumpadipiridum
         const token = sign({
                 email: user.email,
             },
